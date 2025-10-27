@@ -8,7 +8,7 @@ except ValueError as e:
 
 state = "red"
 iterations = 0
-for i in range(0, steps):
+for i in range(0, steps+1):
     if (state == "red") & (iterations ==0) | (state == "amber") & (iterations == states["amber"]):
         if (iterations == 3) & (iterations == states["amber"]):
             iterations = 0
@@ -34,7 +34,6 @@ for i in range(0, steps):
     else:
         print(f"Time {i} State {state}")
 
-print("Done.")
     
     
 

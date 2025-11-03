@@ -32,21 +32,33 @@ program.
 print(f"Slug = {slug}")
 """
 
-slug1 = "Big dog steals the Sun"
-slug2 = "Hollow Knight: Silksong is breaking Steam, Nintendo's eShop"
+string_slug = input("Enter a title: ")
 
 #1
-slug1 = slug1.lower()
-slug2 = slug2.lower()
+string_slug = string_slug.lower()
 
 #2
-slug1 = slug1.split(" ")
-slug2 = slug2.split(" ")
-print("-".join([word for word in slug1 if word not in ("a", "the")])) # list comprehensions
-print("-".join([word for word in slug2 if word not in ("a", "the")]))
+string_slug = string_slug.split(" ")
+string_slug = ("-".join([word for word in string_slug if word not in ("a", "the")])) # list comprehensions
 
-#3 
-print("-".join([word for word in slug2 if word not in ("a", "the")]))
+
+#3 actual
+LenSlug = len(string_slug)
+if LenSlug > 25:
+    while LenSlug > 25:
+        idx = len(string_slug)-1
+        string_slug = string_slug[:idx] + string_slug[idx + 1:]
+        LenSlug = len(string_slug)
+
+print(f"Slug = {string_slug}")
+
+#3 nvm
+"""slug1 = list(slug1)
+slug2 = list(slug2)
+print(slug1,"\n",slug2)
+slug1 = ("-".join([word for word in slug1 if word.isalpha()])) # list comprehensions
+slug2 = ("-".join([word for word in slug2 if word.isalpha()]))
+print(slug1,"\n",slug2)"""
 
 """
 Python 3.14.0 (tags/v3.14.0:ebf955d, Oct  7 2025, 10:15:03) [MSC v.1944 64 bit (AMD64)] on win32

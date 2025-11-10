@@ -4,9 +4,42 @@
 # (3) hunger - the pet's hunger level, default value is 0
 # When an instance of VirtualPet is created, only the name is needed, as a minimum, for the __init__ method
 
+class VirtualPet:
+
+    def _init_(self, petName, energy = 10, hunger = 0 ):
+        self.petName = petName
+        self.energy = energy
+        self.hunger = hunger
+    
+    def play(self):
+        if self.energy < 2:
+            print(f"{self.petName} is too tired to play!")
+        else:
+            self.energy-=2
+            self.hunger-=self.hunger - 2
+    
+    def feed(self):
+        if self.hunger < 0:
+            print(f"{self.petName} is overfed!")
+        else:
+            self.hunger-=-3
+    
+    def sleep(self):
+        self.energy+=10
+
+    def __str__(self):
+        details = f"{self.petName} has {self.energy} energy points and hunger level{self.hunger}"
+        return details
+    
+    def __eq__(self, value):
+        if (self.energy == self.hunger):
+            value = True
+        else:
+            value = False
+        return value
 
 
-
+Pet = VirtualPet("Timmy", 0, 0)
 
 # This class has the following methods:
 # (1) play() - If energy<2, report in the format "{name} is too tired to play!".
@@ -22,13 +55,3 @@
 # Check that attributes are modified as expected
 # For example:
 
-''' Tests
-Pet = VirtualPet("Timmy",4,3)
-print(Pet)
-Pet.play()
-print(Pet)
-Pet.feed()
-print(Pet)
-Pet.sleep()
-print(Pet)
-'''

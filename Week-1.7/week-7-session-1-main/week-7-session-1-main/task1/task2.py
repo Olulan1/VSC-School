@@ -1,15 +1,15 @@
 # Identify and correct the errors in the following class definition.
 
 class Rectangle:
-    def __init__(self, wid, high):
-        height = high
-        width = wid
+    def __init__(self, width, height):
+       self.height  = height
+       self.width= width
 
-    def set_height(self, high):
-        self.height = high
+    def set_height(self, height):
+        self.height = height
 
-    def set_width(wid):
-        self.width = wid
+    def set_width(self, wid):
+        self.width= wid
 
 
 # Once corrected, we can now create an instance of Rectangle

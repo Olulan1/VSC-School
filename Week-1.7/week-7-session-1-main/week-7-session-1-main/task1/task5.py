@@ -5,14 +5,22 @@
 
 # When an instance of Character is created, the value to all three fields are required.
 
+class Character():
 
-
-
+    def __init__(self, name, health, attack_power):
+        self.name         = name
+        self.health       = health
+        self.attack_power = attack_power
 
 # Once completed, create two instances of Character to two of your most favourite game characters.
 # Then, write code to print the details of each character.
 
-
+cidKagenou = Character("Cid", 100, 10)
+Shadow = Character("Shadow", 100, 100)
 
 # How would you change the __init__ function so that by default the health is 100
 # and attack_power is 10.
+
+"""
+Set the arguments to optional for those two variables.
+"""

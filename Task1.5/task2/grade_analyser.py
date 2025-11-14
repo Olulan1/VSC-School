@@ -31,7 +31,7 @@ Your code will only be tested on valid files in the format shown in the 4 exampl
 '''
 import sys
 file = input("Your filename: ")
-filename = f"VSC-School/Task1.5/task2/{file}"
+filename = file # this is hard to make the autograder recognise
 with open(filename, "r") as f1:
      next(f1)
      lines = f1.readlines()
@@ -45,41 +45,36 @@ for line in lines:
      data.append(line)
 data = [line.split(",") for line in data]
 for line in data:
+     while ("" in line):
+          line.remove("")
+     while ("\n" in line):
+          line.remove("\n")
+     print(line)
      IDS.append(line[0])
-     line[12] = line[12].strip()
-     print(line[12])
+     linelen = len(line)
+     ll = linelen-1
+     line[ll] = line[ll].strip()
 
 
 for line in data:
      sno = sno+1
      print(f"student: {sno}")
      i = 1
-     total = avg = 0
-     first = False
-     for i in range(1, 12):
-          print(i)
-          try:
-               total+=int(line[i])
-               if i==11:
-                    x = 12
-                    if len(line) > 11:
-                         print("Line length ",len(line))
-                         total+=int(line[x])
-                    print(f"No. of modules: {x}")
-          except ValueError:
-               if first == False:
-                    print(f"No. of modules: {i-1}")
-                    print(f"Total: {total}")
-                    x = i-1
-               first = True         
+     total = avg = x = 0
+     print(line)
+     for i in range (1, len(line)):
+          total+=int(line[i])
+          x+=1
+
      print("X is:",x)
      print(total)
      avg = float(total/x)
-     if avg >= 70: temp = "1"
-     elif avg >= 60: temp = "2:1"
-     elif avg >= 50: temp = "2:2"
-     elif avg >= 40: temp = "3"
-     elif avg <40: temp = "F"
+     t = round(avg)
+     if t >= 70: temp = "1"
+     elif 69 >= t >= 60: temp = "2:1"
+     elif 59 >= t >= 50: temp = "2:2"
+     elif 49 >= t >= 40: temp = "3"
+     elif t < 40: temp = "F"
      grades.append(temp)
      avgs.append(avg)
      total = 0
@@ -88,13 +83,10 @@ filename = f"{filename}_out.csv"
 
 for i in range (0, len(IDS)):
      students.update({IDS[i]:grades[i]})
-     s = str(IDS[i])+","+str(round(avgs[i],2))+","+str(grades[i])+"\n"
+     s = str(IDS[i])+","+str(format(avgs[i],'.2f'))+","+str(grades[i])+"\n"
      if i == 0:
           with open(filename, "w") as f2:
                f2.write(s)
      else:
           with open(filename, "a") as f3:
                f3.writelines(s)
-
-
-

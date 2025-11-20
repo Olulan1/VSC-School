@@ -28,6 +28,10 @@ class Team:
             # TODO: If not found, print a message indicating the Pokémon is not in the team
         pass
 
+    def inTeam(self):
+        
+        pass
+
 # Example usage
 # team = Team()
 # team.add_pokemon("squirtle")

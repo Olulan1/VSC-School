@@ -4,29 +4,50 @@ Exercise 1.3: Custom Output (Raw vs Summary) (Stub)
 - Display either the full raw JSON or a summarised version based on a parameter.
 """
 
-import httpx
-import json
+import httpx, json, pprint
 
 def fetch_pokemon_custom(name, display_raw=False):
     """Fetch Pokémon details and display either raw JSON or a summary."""
-    # TODO: Construct the URL using the Pokémon name
-    
+   # TODO: Construct the URL using the Pokémon name
+    url = f"https://pokeapi.co/api/v2/pokemon/{name.lower()}"
+
     # TODO: Make a GET request to the URL
+    data = httpx.get(url)
     
+      
     # TODO: Check if the response is successful (status_code == 200)
-    pass
-        # TODO: Parse the JSON response
+    if data.status_code == 200:
+        mars = data.json()
+        types = json.dumps(mars)
+        if display_raw:
+            pprint.pprint(mars, indent=8) 
+        else:
+            print("___________________________")
+            
+            types = json.dumps(mars)
+            types = [t['type']['name'] for t in mars['types']]
+            print(f"Name: {mars['name'].upper()}")
+            print("Types: ", end="")
+            for i in range (0, len(types)):
+                print(types[i],",", end="")
+            print()
+            print("Base Stats: ")
+            for i in range (0, len(mars['stats'])):
+                print(mars['stats'][i]['stat']['name'].upper(),": ", end="")
+                print(mars['stats'][i]['base_stat'])
+            print()
+            print("Image URL: ",mars['sprites']['front_default'])
+            print("___________________________")
+    else:
+        print("Invalid pokemon.")
+
         
     
-        #if display_raw:
-            # TODO: Pretty-print the raw JSON
-        #else:
-            # TODO: Extract the Pokémon's name, types, base stats, and image URL
-            
-            # TODO: Print the details in a readable format
     
-    # TODO: Print an error message if the Pokémon is not found
+        
 
+fetch_pokemon_custom("Goodra", False)
+fetch_pokemon_custom("Charmy")
 
 # Example usage
 # fetch_pokemon_custom("squirtle")  # Display summary by default

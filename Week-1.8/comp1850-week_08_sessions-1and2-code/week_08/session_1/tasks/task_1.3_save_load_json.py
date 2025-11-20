@@ -16,4 +16,12 @@ data = {
 
 # TODO: Save the data to a file named "user.json" using json.dump()
 
+
+
+with open("user.json", "w") as f1:
+    json.dump(data, f1)    
+
 # TODO: Load the data back from "user.json" using json.load() and print it
+
+with open("user.json", "r") as f2:
+    print(json.load(f2))

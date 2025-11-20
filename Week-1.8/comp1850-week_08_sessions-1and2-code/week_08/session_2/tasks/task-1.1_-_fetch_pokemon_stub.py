@@ -5,22 +5,32 @@ Exercise 1.1: Fetch and Display a Pokémon (Stub)
 """
 
 import httpx
+import pprint
 import json
 
 
 def fetch_pokemon(name):
     """Fetch Pokémon data from the PokéAPI and display raw JSON."""
     # TODO: Construct the URL using the Pokémon name (hint: f"https://pokeapi.co/api/v2/pokemon/{name.lower()}")
-
+    url = f"https://pokeapi.co/api/v2/pokemon/{name.lower()}"
     # TODO: Make a GET request to the URL with httpx
-
+    data = httpx.get(url)
     # TODO: Check if the response is successful (status_code == 200)
+    if data.status_code == 200:
+        print("Success.")
+        mars = data.json()
+        mars = json.dumps(mars)
+        pprint.pprint(mars, indent=8)
         # TODO: Parse the JSON response and pretty-print it with json.dumps(..., indent=4)
-    # else:
+    else:
         # TODO: Print an error message if the Pokémon is not found
+        print("Pokemon not found.")
 
 # Example usage
 # fetch_pokemon("squirtle")
+
+userIn = input("Please enter a pokemon: ")
+fetch_pokemon(userIn)
 
 """
 Hints:

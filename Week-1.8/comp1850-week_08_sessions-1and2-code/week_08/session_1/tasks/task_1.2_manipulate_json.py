@@ -4,7 +4,7 @@ Task 1.2: Manipulating JSON Data
 Goal: Modify JSON data and convert it back to a JSON string.
 """
 
-import json
+import json, httpx
 
 # Original JSON data
 data = {
@@ -16,4 +16,10 @@ data = {
 
 # TODO: Modify the "isActive" field to False and add "viewer" to the roles list
 
+data["isActive"] = False
+data["roles"].append("viewer")
+
 # TODO: Convert the updated data back to a JSON string using json.dumps() and print it
+
+json_string = json.dumps(data)
+print(json_string)

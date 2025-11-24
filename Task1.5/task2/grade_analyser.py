@@ -16,7 +16,7 @@ Students can have between 1 - 12 modules, for example:
 You should ensure that you consider the number of modules when calculating your mean.
 
 Your code needs to:
-- ask for the filename of the student file
+- ask for the inputfilename of the student file
 - read in the data, and for each student calculate their average grade and classification
 - write out this calculated data in the format:
      student_id,average_grade,classification
@@ -29,10 +29,10 @@ Your output files must be structured exactly as described - output files for all
 Note:
 Your code will only be tested on valid files in the format shown in the 4 example files in this folder - you do not need to validate any data.
 '''
-import sys
-file = input("Your filename: ")
-filename = file # this is hard to make the autograder recognise
-with open(filename, "r") as f1:
+import math
+inputfilename = input("Your inputfilename: ")
+inputfilename = inputfilename.strip()
+with open(inputfilename, "r") as f1:
      next(f1)
      lines = f1.readlines()
 data = []
@@ -49,7 +49,6 @@ for line in data:
           line.remove("")
      while ("\n" in line):
           line.remove("\n")
-     print(line)
      IDS.append(line[0])
      linelen = len(line)
      ll = linelen-1
@@ -58,35 +57,31 @@ for line in data:
 
 for line in data:
      sno = sno+1
-     print(f"student: {sno}")
      i = 1
      total = avg = x = 0
-     print(line)
      for i in range (1, len(line)):
           total+=int(line[i])
           x+=1
 
-     print("X is:",x)
-     print(total)
      avg = float(total/x)
-     t = round(avg)
-     if t >= 70: temp = "1"
-     elif 69 >= t >= 60: temp = "2:1"
-     elif 59 >= t >= 50: temp = "2:2"
-     elif 49 >= t >= 40: temp = "3"
-     elif t < 40: temp = "F"
+     avg = round(avg, 2)
+     t = math.floor(avg)
+     if t >= 70.0: temp = "1"
+     elif 69.0 >= t >= 60.0: temp = "2:1"
+     elif 59.0 >= t >= 50.0: temp = "2:2"
+     elif 49.0 >= t >= 40.0: temp = "3"
+     elif t < 40.0: temp = "F"
      grades.append(temp)
      avgs.append(avg)
      total = 0
-filename = filename.strip(".csv")
-filename = f"{filename}_out.csv"
+inputfilename = f"{inputfilename}_out.csv"
 
 for i in range (0, len(IDS)):
      students.update({IDS[i]:grades[i]})
      s = str(IDS[i])+","+str(format(avgs[i],'.2f'))+","+str(grades[i])+"\n"
      if i == 0:
-          with open(filename, "w") as f2:
+          with open(inputfilename, "w") as f2:
                f2.write(s)
      else:
-          with open(filename, "a") as f3:
+          with open(inputfilename, "a") as f3:
                f3.writelines(s)
